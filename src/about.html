@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Abimada Portfolio</title>
+    <link rel="stylesheet" href="./output.css">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="min-h-screen bg-[#F4F4F3] text-slate-800 antialiased font-sans selection:bg-slate-900 selection:text-white">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-6">
+
+        <!-- Logo -->
+        <a href="./index.html" class="text-xl font-black tracking-widest text-slate-900 hover:opacity-80 transition-opacity">
+            ABIMADA<span class="text-xs text-slate-400 font-mono ml-1">.DEV</span>
+        </a>
+
+        <!-- Menu -->
+        <div class="flex items-center gap-8 mt-4 md:mt-0 text-sm font-medium text-slate-600">
+            <a href="./index.html" class="hover:text-slate-900 transition-colors">
+                Home
+            </a>
+            <a href="./about.html" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-0.5">
+                About
+            </a>
+            <a href="./projects.html" class="hover:text-slate-900 transition-colors">
+                Projects
+            </a>
+            <a href="./contact.html" class="hover:text-slate-900 transition-colors">
+                Contact
+            </a>
+            <a href="./todo.html" class="hover:text-slate-900 transition-colors">
+                To-Do
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="px-4 md:px-6 py-4 md:py-8">
+
+        <section class="max-w-6xl mx-auto bg-[#ECECEB] rounded-3xl p-8 md:p-14 border border-black/5 shadow-sm">
+
+            <!-- Section Title -->
+            <div class="mb-10 border-b border-slate-300/60 pb-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-slate-400">Background & Expertise</span>
+                <h1 class="text-4xl md:text-5xl font-serif text-slate-900 mt-1">
+                    About <span class="italic font-normal">Me.</span>
+                </h1>
+            </div>
+
+            <!-- Bento Layout Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Description Card (Bento Left) -->
+                <div class="lg:col-span-7 bg-white/70 backdrop-blur-sm p-8 rounded-2xl border border-black/5 space-y-4">
+                    <h2 class="text-2xl font-bold text-slate-900 font-serif mb-2">
+                        Hello, I'm Abimada
+                    </h2>
+
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        I am a Computer Science student with a strong passion for exploring technology and computer science concepts.
+                    </p>
+
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        My primary areas of interest include <span class="font-semibold text-slate-900">network engineering</span>, <span class="font-semibold text-slate-900">UI/UX design</span>, and modern web project development.
+                    </p>
+
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        I enjoy learning new technologies and constantly refining my technical skills through practical projects and hands-on experience.
+                    </p>
+                </div>
+
+
+                <!-- Skills & Interests Card (Bento Right) -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- Skills Box -->
+                    <div class="bg-slate-900 text-white p-8 rounded-2xl border border-slate-800 shadow-xl">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-bold font-serif">My Skills</h2>
+                            <i class="fa-solid fa-layer-group text-slate-500"></i>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2.5">
+                            <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 text-xs font-mono rounded-lg border border-slate-700/60">
+                                <i class="fa-solid fa-network-wired me-1.5 text-emerald-400"></i> Networking
+                            </span>
+                            <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 text-xs font-mono rounded-lg border border-slate-700/60">
+                                <i class="fa-solid fa-pen-nib me-1.5 text-indigo-400"></i> UI/UX Design
+                            </span>
+                            <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 text-xs font-mono rounded-lg border border-slate-700/60">
+                                <i class="fa-brands fa-java me-1.5 text-orange-400"></i> Java
+                            </span>
+                            <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 text-xs font-mono rounded-lg border border-slate-700/60">
+                                <i class="fa-brands fa-html5 me-1.5 text-red-400"></i> HTML
+                            </span>
+                            <span class="px-3.5 py-1.5 bg-slate-800 text-slate-200 text-xs font-mono rounded-lg border border-slate-700/60">
+                                <i class="fa-brands fa-css3-alt me-1.5 text-sky-400"></i> CSS
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Info Box -->
+                    <div class="bg-white/70 backdrop-blur-sm p-6 rounded-2xl border border-black/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs font-mono text-slate-400 uppercase">Education Status</p>
+                            <p class="text-sm font-semibold text-slate-800 mt-0.5">Computer Science Major</p>
+                        </div>
+                        <i class="fa-solid fa-graduation-cap text-2xl text-slate-400"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="py-8 text-center text-xs text-slate-400 font-mono">
+        <p>© 2026 ABIMADA PORTFOLIO — BUILT WITH TAILWIND CSS</p>
+    </footer>
+
+</body>
+
+</html>
