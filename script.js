@@ -1,83 +1,121 @@
-const taskInput = document.getElementById("taskInput");
-const addTaskButton = document.getElementById("addTaskButton");
-const taskList = document.getElementById("taskList");
+document.addEventListener("DOMContentLoaded", function () {
 
-// 1. Muat data dari localStorage saat halaman pertama kali dibuka
-document.addEventListener("DOMContentLoaded", loadTasks);
+    // ==========================================
+    // LOGIKA KALKULATOR KONVERSI BINER
+    // ==========================================
+    const modeSelect = document.getElementById("modeSelect");
+    const numberInput = document.getElementById("numberInput");
+    const inputLabel = document.getElementById("inputLabel");
+    const convertBtn = document.getElementById("convertBtn");
+    const resultDisplay = document.getElementById("resultDisplay");
+    const logicSteps = document.getElementById("logicSteps");
+    const errorMessage = document.getElementById("errorMessage");
 
-addTaskButton.addEventListener("click", addTask);
+    if (!modeSelect || !numberInput) return; // Mencegah error jika dibuka di halaman selain calculator.html
 
-taskInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        addTask();
+    // Ubah label & reset saat mode diganti
+    modeSelect.addEventListener("change", function () {
+        numberInput.value = "";
+        resultDisplay.innerText = "0";
+        logicSteps.innerHTML = "Waiting for input...";
+        errorMessage.classList.add("hidden");
+
+        if (modeSelect.value === "binToDec") {
+            inputLabel.innerText = "Enter Binary Number (e.g. 10110)";
+            numberInput.placeholder = "Type 0 or 1...";
+        } else {
+            inputLabel.innerText = "Enter Decimal Number (e.g. 22)";
+            numberInput.placeholder = "Type base 10 number...";
+        }
+    });
+
+    // Jalankan konversi saat tombol diklik atau tekan Enter
+    convertBtn.addEventListener("click", processConversion);
+    numberInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") processConversion();
+    });
+
+    function processConversion() {
+        const val = numberInput.value.trim();
+        const mode = modeSelect.value;
+        errorMessage.classList.add("hidden");
+
+        if (val === "") {
+            showError("Input cannot be empty!");
+            return;
+        }
+
+        if (mode === "binToDec") {
+            // Validasi biner (hanya angka 0 dan 1)
+            if (!/^[01]+$/.test(val)) {
+                showError("Binary input can only contain 0 and 1!");
+                return;
+            }
+            convertBinaryToDecimal(val);
+        } else {
+            // Validasi desimal (hanya angka bulat positif)
+            if (!/^\d+$/.test(val)) {
+                showError("Decimal input must be a positive integer!");
+                return;
+            }
+            convertDecimalToBinary(parseInt(val, 10));
+        }
+    }
+
+    function showError(msg) {
+        errorMessage.innerHTML = `<i class="fa-solid fa-circle-exclamation me-1"></i> ${msg}`;
+        errorMessage.classList.remove("hidden");
+        resultDisplay.innerText = "Error";
+        logicSteps.innerHTML = `<span class="text-red-400">${msg}</span>`;
+    }
+
+    // LOGIKA MATEMATIKA: Biner ke Desimal
+    function convertBinaryToDecimal(binStr) {
+        let decimalValue = 0;
+        let stepsHTML = [];
+        const len = binStr.length;
+
+        for (let i = 0; i < len; i++) {
+            const digit = parseInt(binStr[i], 10);
+            const power = len - 1 - i;
+            const termValue = digit * Math.pow(2, power);
+            decimalValue += termValue;
+
+            stepsHTML.push(
+                `<span>Bit [${digit}] × 2<sup>${power}</sup> = <b>${termValue}</b></span>`
+            );
+        }
+
+        resultDisplay.innerText = decimalValue;
+        logicSteps.innerHTML = stepsHTML.join("<br>") + 
+            `<hr class="border-slate-800 my-2"><b>Sum = ${decimalValue} (Decimal)</b>`;
+    }
+
+    // LOGIKA MATEMATIKA: Desimal ke Biner
+    function convertDecimalToBinary(decNum) {
+        if (decNum === 0) {
+            resultDisplay.innerText = "0";
+            logicSteps.innerHTML = "0 ÷ 2 = 0 (Remainder: 0)";
+            return;
+        }
+
+        let tempNum = decNum;
+        let remainders = [];
+        let stepsHTML = [];
+
+        while (tempNum > 0) {
+            let rem = tempNum % 2;
+            let quotient = Math.floor(tempNum / 2);
+
+            stepsHTML.push(`${tempNum} ÷ 2 = ${quotient} (Remainder: <b>${rem}</b>)`);
+            remainders.push(rem);
+            tempNum = quotient;
+        }
+
+        const binaryStr = remainders.reverse().join("");
+
+        resultDisplay.innerText = binaryStr;
+        logicSteps.innerHTML = stepsHTML.join("<br>") + 
+            `<hr class="border-slate-800 my-2"><b>Binary (Read remainders backwards) = ${binaryStr}</b>`;
     }
 });
-
-function addTask() {
-    const taskText = taskInput.value.trim();
-    if (taskText === "") return;
-
-    createTaskElement(taskText, false);
-    saveTasks();
-
-    taskInput.value = "";
-    taskInput.focus();
-}
-
-function createTaskElement(text, completed) {
-    const task = document.createElement("li");
-    task.className = "flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm hover:border-slate-300 transition-all cursor-pointer group";
-
-    task.innerHTML = `
-        <span class="task-text text-slate-800 text-sm font-medium flex items-center gap-2 ${completed ? 'line-through text-slate-400' : ''}">
-            <span class="w-2 h-2 rounded-full ${completed ? 'bg-slate-300' : 'bg-slate-900'} font-bullet"></span>
-            ${text}
-        </span>
-
-        <button class="delete-btn text-slate-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors text-xs font-mono flex items-center gap-1">
-            <i class="fa-solid fa-trash-can"></i>
-            <span class="hidden sm:inline">Delete</span>
-        </button>
-    `;
-
-    // Fitur Toggle Completed (Coret task jika diklik)
-    task.addEventListener("click", function (e) {
-        if (e.target.closest('.delete-btn')) return; // Jangan jalankan jika yang diklik tombol delete
-        
-        const span = task.querySelector(".task-text");
-        const bullet = task.querySelector(".font-bullet");
-        
-        span.classList.toggle("line-through");
-        span.classList.toggle("text-slate-400");
-        span.classList.toggle("bg-slate-900");
-        bullet.classList.toggle("bg-slate-300");
-        bullet.classList.toggle("bg-slate-900");
-        
-        saveTasks();
-    });
-
-    // Fitur Delete
-    task.querySelector(".delete-btn").addEventListener("click", function () {
-        task.remove();
-        saveTasks();
-    });
-
-    taskList.appendChild(task);
-}
-
-// Simpan daftar task ke localStorage
-function saveTasks() {
-    const tasks = [];
-    document.querySelectorAll("#taskList li").forEach(li => {
-        const text = li.querySelector(".task-text").innerText.trim();
-        const completed = li.querySelector(".task-text").classList.contains("line-through");
-        tasks.push({ text, completed });
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-// Ambil data dari localStorage
-function loadTasks() {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    savedTasks.forEach(task => createTaskElement(task.text, task.completed));
-}

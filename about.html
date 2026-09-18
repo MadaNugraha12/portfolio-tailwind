@@ -6,39 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Abimada Portfolio</title>
     <link rel="stylesheet" href="./output.css">
-    <!-- Font Awesome untuk ikon -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="min-h-screen bg-[#F4F4F3] text-slate-800 antialiased font-sans selection:bg-slate-900 selection:text-white">
 
-    <!-- NAVBAR -->
-    <nav class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-6">
+    <!-- NAVBAR STICKY -->
+    <nav class="sticky top-0 z-50 bg-[#F4F4F3]/90 backdrop-blur-md border-b border-slate-300/50 py-4 px-6" style="position: sticky; top: 0; z-index: 50; background-color: rgba(244, 244, 243, 0.9); backdrop-filter: blur(8px);">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo -->
+            <a href="./index.html" class="text-xl font-black tracking-widest text-slate-900 hover:opacity-80 transition-opacity">
+                ABIMADA<span class="text-xs text-slate-400 font-mono ml-1">.DEV</span>
+            </a>
 
-        <!-- Logo -->
-        <a href="./index.html" class="text-xl font-black tracking-widest text-slate-900 hover:opacity-80 transition-opacity">
-            ABIMADA<span class="text-xs text-slate-400 font-mono ml-1">.DEV</span>
-        </a>
-
-        <!-- Menu -->
-        <div class="flex items-center gap-8 mt-4 md:mt-0 text-sm font-medium text-slate-600">
-            <a href="./index.html" class="hover:text-slate-900 transition-colors">
-                Home
-            </a>
-            <a href="./about.html" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-0.5">
-                About
-            </a>
-            <a href="./projects.html" class="hover:text-slate-900 transition-colors">
-                Projects
-            </a>
-            <a href="./contact.html" class="hover:text-slate-900 transition-colors">
-                Contact
-            </a>
-            <a href="./todo.html" class="hover:text-slate-900 transition-colors">
-                To-Do
-            </a>
+            <!-- Menu -->
+            <div class="flex items-center gap-6 mt-4 md:mt-0 text-sm font-medium text-slate-600">
+                <a href="./index.html" class="hover:text-slate-900 transition-colors">Home</a>
+                <a href="./about.html" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-0.5">About</a>
+                <a href="./projects.html" class="hover:text-slate-900 transition-colors">Projects</a>
+                <a href="./contact.html" class="hover:text-slate-900 transition-colors">Contact</a>
+                <a href="./calculator.html" class="px-4 py-2 bg-slate-900 text-white rounded-full text-xs font-mono hover:bg-slate-800 transition-all shadow-md">
+                    <i class="fa-solid fa-calculator me-1"></i> Calculator
+                </a>
+            </div>
         </div>
-
     </nav>
 
 
@@ -58,7 +50,7 @@
             <!-- Bento Layout Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-                <!-- Description Card (Bento Left) -->
+                <!-- Description Card -->
                 <div class="lg:col-span-7 bg-white/70 backdrop-blur-sm p-8 rounded-2xl border border-black/5 space-y-4">
                     <h2 class="text-2xl font-bold text-slate-900 font-serif mb-2">
                         Hello, I'm Abimada
@@ -78,7 +70,7 @@
                 </div>
 
 
-                <!-- Skills & Interests Card (Bento Right) -->
+                <!-- Skills & Interests Card -->
                 <div class="lg:col-span-5 space-y-6">
 
                     <!-- Skills Box -->
@@ -125,7 +117,7 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- FOOTER -->
     <footer class="py-8 text-center text-xs text-slate-400 font-mono">
         <p>© 2026 ABIMADA PORTFOLIO — BUILT WITH TAILWIND CSS</p>
     </footer>
